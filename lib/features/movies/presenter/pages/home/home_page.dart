@@ -1,3 +1,4 @@
+import 'package:enter_komputer_test/core/components/main_layout.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MainLayout(
+      body: Text(""),
+    );
   }
 }

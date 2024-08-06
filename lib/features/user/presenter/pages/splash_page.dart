@@ -1,5 +1,5 @@
-import 'package:enter_komputer_test/components/loading.dart';
-import 'package:enter_komputer_test/components/main_layout.dart';
+import 'package:enter_komputer_test/core/components/loading.dart';
+import 'package:enter_komputer_test/core/components/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // adding image for thumbnail
-            Image(image: const AssetImage("assets/png/movie.png"), width: MediaQuery.of(context).size.width * .3),
+            Image(image: const AssetImage("assets/images/movie.png"), width: MediaQuery.of(context).size.width * .3),
             const SizedBox(height: 12),
             const LoadingSpinner()
           ],

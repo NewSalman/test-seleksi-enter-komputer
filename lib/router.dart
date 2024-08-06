@@ -1,6 +1,6 @@
-import 'package:enter_komputer_test/features/authentication/presenter/pages/login_page.dart';
-import 'package:enter_komputer_test/features/authentication/presenter/pages/splash_page.dart';
-import 'package:enter_komputer_test/features/movies/presenter/pages/home_page.dart';
+import 'package:enter_komputer_test/features/user/presenter/pages/profile_page.dart';
+import 'package:enter_komputer_test/features/user/presenter/pages/splash_page.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page.dart';
 import 'package:go_router/go_router.dart';
 
 
@@ -15,9 +15,9 @@ final appRoute = GoRouter(
       builder:(context, state) => const SplashPage(),
     ),
     GoRoute(
-      name: "login",
-      path: "/login",
-      builder: (context, state) => const LoginPage(),
+      name: "profile",
+      path: "/profile",
+      builder: (context, state) => const ProfilePage(),
     ),
     GoRoute(
       name: "home",

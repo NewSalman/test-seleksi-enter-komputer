@@ -22,7 +22,14 @@ class _LoadingSpinnerState extends State<LoadingSpinner> with TickerProviderStat
   Widget build(BuildContext context) {
     return RotationTransition(
       turns: _animation,
-      child: Image(image: const AssetImage("assets/png/dvd.png"), width: MediaQuery.of(context).size.width * .1),
+      child: Image(image: const AssetImage("assets/images/dvd.png"), width: MediaQuery.of(context).size.width * .1),
     );
+  }
+
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }
