@@ -17,17 +17,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _notifier.getPopularMovies();
     super.initState();
+
+    
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _notifier.refresh();
   }
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        // await _notifier.getPopularMovies();
-        // await _notifier.getNowPlayingMovies();
-        await _notifier.getGenreList();
+        await _notifier.refresh();
       },
       child: MainLayout(
       body: ListView(
@@ -51,9 +57,9 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, i) => MovieCard(movie: homeState.popularMoviesState.movies[i]), 
+                  itemBuilder: (_, i) => MovieCard(movie: homeState.popularMoviesState.values[i]), 
                   separatorBuilder: (_, __) => const SizedBox(height: 8), 
-                  itemCount: homeState.popularMoviesState.movies.length
+                  itemCount: homeState.popularMoviesState.values.length
                 ),
               );
             },

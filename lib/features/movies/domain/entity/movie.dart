@@ -1,3 +1,5 @@
+import 'package:enter_komputer_test/features/movies/domain/entity/genre.dart';
+
 class Movie {
   int? id;
   bool? adult;
@@ -16,6 +18,7 @@ class Movie {
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? deletedAt;
+  List<Genre> genres = List.empty(growable: true);
 
   Movie(
       {this.id,

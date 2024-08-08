@@ -1,26 +1,23 @@
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  const MovieCard({super.key, required this.movie});
+  MovieCard({super.key, required this.movie});
+
+
+  TextStyle textStyle = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
       height: MediaQuery.of(context).size.height * .3,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black54,
-          width: .5
-        ),
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          // BoxShadow(blurRadius: 1, spreadRadius: 1, color: Colors.black)
-        ]
-      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,30 +40,42 @@ class MovieCard extends StatelessWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(movie.title ?? ""),
+                        Text(movie.title ?? "", style: textStyle),
                         Text.rich(
                           TextSpan(
+                            style: textStyle.copyWith(fontSize: 9),
                             children: [
-                              TextSpan(text: "Lang: "),
+                              const TextSpan(text: "Lang: "),
                               TextSpan(text: movie.originalLanguage)
                             ]
                           )
                         ),
                         Text.rich(
                           TextSpan(
+                            style: textStyle.copyWith(fontSize: 9),
                             children: [
-                              TextSpan(text: "Release date: "),
+                              const TextSpan(text: "Release date: "),
                               TextSpan(text: movie.releaseDate)
                             ]
                           )
                         ),
                         Text.rich(
                           TextSpan(
+                            style: textStyle.copyWith(fontSize: 9),
                             children: [
-                              TextSpan(text: "vote: "),
+                              const TextSpan(text: "vote: "),
                               TextSpan(text: (movie.voteCount ?? 0).toString())
+                            ]
+                          )
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            style: textStyle.copyWith(fontSize: 9),
+                            children: [
+                              const TextSpan(text: "genres: "),
+                              ...movie.genres.map((e) => TextSpan(text: ("${e.name ?? ""}, ").toLowerCase())).toList()
                             ]
                           )
                         ),
@@ -76,23 +85,36 @@ class MovieCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () {}, 
-                        icon: Icon(Icons.favorite_border_rounded, size: 12), 
-                        label: Text("Add Favorite", style: TextStyle(
-                            fontSize: 9,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {}, 
+                              icon: const Icon(Icons.favorite_border_rounded, size: 12), 
+                              label: const Text("Add Favorite", style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      SizedBox(height: 8),
-                      ElevatedButton.icon(
-                        onPressed: () {}, 
-                        icon: Icon(Icons.add, size: 12),
-                        label: Text("Add to Watchlist", style: TextStyle(
-                            fontSize: 9,
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () {}, 
+                              icon: const Icon(Icons.add, size: 12),
+                              label: const Text("Add to Watchlist", style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              )
+                            ),
                           ),
-                        )
+                        ],
                       ),
+
                     ],
                   )
                 ],
