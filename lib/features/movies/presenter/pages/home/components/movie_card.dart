@@ -1,3 +1,4 @@
+import 'package:enter_komputer_test/core/components/image_network_loader.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
@@ -23,11 +24,10 @@ class MovieCard extends StatelessWidget {
         children: [
           Builder(builder: (bCtx) {
             return Container(
-              child: Image.network(
-                Constants.imageURL + movie.backdropPath!,
-                width: MediaQuery.of(bCtx).size.width * .3,
-                height: MediaQuery.of(bCtx).size.height,
-                fit: BoxFit.cover,
+              child: ImageNetworkLoader(
+                url: Constants.imageURL + movie.backdropPath!,
+                size: Size(MediaQuery.of(bCtx).size.width * .3, MediaQuery.of(bCtx).size.height),
+                boxFit: BoxFit.cover,
               ),
             );
           }),

@@ -1,3 +1,4 @@
+import 'package:enter_komputer_test/core/components/image_network_loader.dart';
 import 'package:enter_komputer_test/core/components/loading.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
@@ -21,6 +22,8 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
       height: MediaQuery.of(context).size.height * .6,
       child: Consumer<HomePageNotifier>(
         builder: (ctx, state, child) {
+
+          // if failed fetching data show this error
           if(state.nowPlayingState.error != null) {
             return Center(
               child: Column(
@@ -35,7 +38,9 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
               ),
             );
           }
-    
+
+
+          // creating now playing movie carousel
           return CarouselSlider(
             options: CarouselOptions(
               viewportFraction: 1,
@@ -45,20 +50,10 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
             items: state.nowPlayingState.values.map((movie) {
               return Stack(
                 children: [
-                  Image.network(
-                    Constants.imageURL + movie.backdropPath!,
-                    loadingBuilder: (_, child, imageChunck) {
-                      if(imageChunck == null) {
-                        return child;
-                      }
-
-                      return const Center(
-                        child: LoadingSpinner(),
-                      );
-                    } ,  
-                    errorBuilder: (_, error, stackTrace) => const Text("test"),
-                    height: MediaQuery.of(ctx).size.height,
-                    fit: BoxFit.fitHeight,
+                  ImageNetworkLoader(
+                    url: Constants.imageURL + movie.backdropPath!,
+                    size: Size.fromHeight(MediaQuery.of(ctx).size.height),
+                    boxFit: BoxFit.fitHeight,  
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -98,16 +93,6 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
                                     return GenreChips(movie: movie);
                                   },
                                 )
-
-                                // Builder(
-                                //   builder: (context) {
-                                //     return Row(
-                                //       children: movie.genreIds?.map((e) => Text(e.toString())).toList() ?? [],
-                                //     );
-                                //   },
-                                // )
-
-                                
                               ],
                             ),
                           )
