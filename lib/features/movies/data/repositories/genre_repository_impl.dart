@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:enter_komputer_test/features/movies/data/models/genre_model.dart';
 import 'package:enter_komputer_test/features/movies/data/source/local/genre_local_source.dart';
 import 'package:enter_komputer_test/features/movies/data/source/remote/genre_remote_source.dart';
@@ -16,19 +14,11 @@ class GenreRepositoryImpl extends GenreRepository {
   Future<List<Genre>> getListGenre() async {
     try {
       List<GenreModel> genres = await _genreRemoteSource.getListGenres();
-
       await _genreLocalSource.saveGenreList(genres);
-      var localGenres = await _genreLocalSource.getGenreList();
 
-      print(localGenres["\\genres\\10402"]);
-
-      return [];
+      return (await _genreLocalSource.getGenreList()) ?? List.empty();
     } catch(e) {
-      return [];
+      return (await _genreLocalSource.getGenreList()) ?? List.empty();
     }
-  }
-
-  Future<void> _saveListGenre(List<GenreModel> genres) async {
-    await _genreLocalSource.saveGenreList(genres);
   }
 }
