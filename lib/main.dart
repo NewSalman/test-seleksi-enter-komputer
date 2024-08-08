@@ -1,5 +1,5 @@
 import 'package:enter_komputer_test/dependency_container.dart';
-import 'package:enter_komputer_test/features/movies/domain/repository/movie_repository.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:enter_komputer_test/router.dart';
 // ignore: unused_import
 import 'package:localstore/localstore.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<MovieRepository>(create: (_) => sl.get<MovieRepository>()),
+        ChangeNotifierProvider<HomePageNotifier>(create: (_) => sl.get<HomePageNotifier>())
       ],
       child: MaterialApp.router(
       theme: ThemeData(

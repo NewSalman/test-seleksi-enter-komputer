@@ -19,4 +19,8 @@ class GenreModel extends Genre {
     data['deleted_at'] = deletedAt;
     return data;
   }
+
+  static List<GenreModel> fromResponse(List<dynamic> json) {
+    return json.map((movie) => GenreModel.fromJson(movie)).toList();
+  }
 }
