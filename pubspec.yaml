@@ -40,10 +40,10 @@ dependencies:
   get_it: ^7.6.7
   watch_it: ^1.4.2
   provider: ^6.1.2
-  flutter_svg_provider: ^1.0.6
   carousel_slider: ^4.2.1
-  localstore: ^1.4.0
   intl: ^0.19.0
+  flutter_secure_storage: ^9.2.2
+  permission_handler: ^11.0.1
 
 dev_dependencies:
   flutter_test:
