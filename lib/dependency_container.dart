@@ -8,6 +8,9 @@ import 'package:enter_komputer_test/features/movies/data/source/remote/movie_rem
 import 'package:enter_komputer_test/features/movies/domain/repository/genre_repository.dart';
 import 'package:enter_komputer_test/features/movies/domain/repository/movie_repository.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_notifier.dart';
+import 'package:enter_komputer_test/features/user/presenter/providers/watchlist_favorite_notifier.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:dio/dio.dart';
@@ -28,19 +31,21 @@ void setup() {
     );
 
     dio.interceptors.add(LogInterceptor(
-      // responseHeader: true,
-      // requestHeader: true,
-      // responseBody: true,
-      // requestBody: true,
+      responseHeader: true,
+      requestHeader: true,
+      responseBody: true,
+      requestBody: true,
     ));
 
     return dio;
   });
 
-  sl.registerLazySingleton(() => MovieLocalSource());
+  sl.registerLazySingleton(() => const FlutterSecureStorage());
+
+  sl.registerLazySingleton(() => MovieLocalSource(sl.get<FlutterSecureStorage>()));
   sl.registerLazySingleton(() => MovieRemoteSource(sl.get<Dio>()));
 
-  sl.registerLazySingleton(() => GenreLocalSource());
+  sl.registerLazySingleton(() => GenreLocalSource(sl.get<FlutterSecureStorage>()));
   sl.registerLazySingleton(() => GenreRemoteSource(sl.get<Dio>()));
 
 
@@ -53,5 +58,13 @@ void setup() {
   );
 
 
-  sl.registerFactory<HomePageNotifier>(() => HomePageNotifier(sl.get<MovieRepository>(), sl.get<GenreRepository>()));
+  sl.registerSingleton<HomePageNotifier>(
+    HomePageNotifier(sl.get<MovieRepository>(), sl.get<GenreRepository>())
+  );
+
+  sl.registerFactory<MovieDetailNotifier>(
+    () => MovieDetailNotifier(sl.get<MovieRepository>())
+  );
+
+  sl.registerSingleton(WatchlistFavoriteNotifier(sl.get<MovieRepository>()));
 }
