@@ -13,7 +13,6 @@ class MovieState<T> {
   MovieState(this.values,{this.error});
 }
 
-// class HomePageNotifier extends ChangeNotifier with ReassembleHandler {
 class HomePageNotifier extends ChangeNotifier {
   final MovieRepository _movieRepository;
   final GenreRepository _genreRepository;

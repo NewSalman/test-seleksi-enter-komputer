@@ -1,9 +1,9 @@
 import 'package:enter_komputer_test/core/components/image_network_loader.dart';
-import 'package:enter_komputer_test/core/components/loading.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -48,58 +48,63 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
               autoPlay: true,
             ),
             items: state.nowPlayingState.values.map((movie) {
-              return Stack(
-                children: [
-                  ImageNetworkLoader(
-                    url: Constants.imageURL + movie.backdropPath!,
-                    size: Size.fromHeight(MediaQuery.of(ctx).size.height),
-                    boxFit: BoxFit.fitHeight,  
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ShaderMask(
-                      shaderCallback: (rect) {
-                        return LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [Colors.white.withOpacity(0.8), Colors.transparent],
-
-                        ).createShader(rect);
-                      },
-                      blendMode: BlendMode.dstIn,
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                          width: MediaQuery.of(ctx).size.width,
-                          height: MediaQuery.of(ctx).size.height * .25,
-                          color: Colors.white,
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  movie.originalTitle ?? "",
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Builder(
-                                  builder: (_) {
-                                    if(state.genreState.error != null) {
-                                      return const SizedBox.shrink();
-                                    }
-
-                                    return GenreChips(movie: movie);
-                                  },
-                                )
-                              ],
-                            ),
-                          )
-                      ),
+              return GestureDetector(
+                onTap: () {
+                  context.goNamed("movie_detail", extra: movie.id.toString());
+                },
+                child: Stack(
+                  children: [
+                    ImageNetworkLoader(
+                      url: Constants.imageURL + movie.backdropPath!,
+                      size: Size.fromHeight(MediaQuery.of(ctx).size.height),
+                      boxFit: BoxFit.fitHeight,  
                     ),
-                  )
-                ]
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ShaderMask(
+                        shaderCallback: (rect) {
+                          return LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [Colors.white.withOpacity(0.8), Colors.transparent],
+              
+                          ).createShader(rect);
+                        },
+                        blendMode: BlendMode.dstIn,
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                            width: MediaQuery.of(ctx).size.width,
+                            height: MediaQuery.of(ctx).size.height * .25,
+                            color: Colors.white,
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    movie.originalTitle ?? "",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Builder(
+                                    builder: (_) {
+                                      if(state.genreState.error != null) {
+                                        return const SizedBox.shrink();
+                                      }
+              
+                                      return GenreChips(genres: movie.genres);
+                                    },
+                                  )
+                                ],
+                              ),
+                            )
+                        ),
+                      ),
+                    )
+                  ]
+                ),
               );
             }).toList(),
           );

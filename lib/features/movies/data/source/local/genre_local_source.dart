@@ -5,7 +5,9 @@ import 'package:enter_komputer_test/features/movies/data/models/genre_model.dart
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class GenreLocalSource {
- final _db = const FlutterSecureStorage();
+ final FlutterSecureStorage _db;
+
+  GenreLocalSource(this._db);
 
   Future<List<GenreModel>?> getGenreList() {
     return _db.read(key: Constants.genre)

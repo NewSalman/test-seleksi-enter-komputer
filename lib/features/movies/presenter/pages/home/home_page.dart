@@ -3,6 +3,7 @@ import 'package:enter_komputer_test/features/movies/presenter/pages/home/compone
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/movie_carousel.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +58,14 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, i) => MovieCard(movie: homeState.popularMoviesState.values[i]), 
+                  itemBuilder: (_, i) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.goNamed("movie_detail", extra: homeState.popularMoviesState.values[i].id.toString());
+                      },
+                      child: MovieCard(movie: homeState.popularMoviesState.values[i]),
+                    );
+                  }, 
                   separatorBuilder: (_, __) => const SizedBox(height: 8), 
                   itemCount: homeState.popularMoviesState.values.length
                 ),

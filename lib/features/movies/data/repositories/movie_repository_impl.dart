@@ -1,4 +1,4 @@
-import 'package:enter_komputer_test/features/movies/data/models/movie_model.dart';
+import 'package:enter_komputer_test/features/movies/data/models/movie_detail_model.dart';
 import 'package:enter_komputer_test/features/movies/data/source/local/movie_local_source.dart';
 import 'package:enter_komputer_test/features/movies/data/source/remote/movie_remote_source.dart';
 import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
@@ -30,22 +30,37 @@ class MovieRepositoryImpl extends MovieRepository {
   
   @override
   Future<void> removeFromFavorite(Movie movie) {
-    return _movieLocalSource.removeFromFavorite(MovieModel.fromEntity(movie));
+    return _movieRemoteSource.updateFavorite(movie.id, false);
   }
   
   @override
   Future<void> removeFromWatchList(Movie movie) {
-    return _movieLocalSource.removeFromWatchList(MovieModel.fromEntity(movie));
+    return _movieRemoteSource.updateWatchList(movie.id, false);
   }
   
   @override
   Future<void> saveToFavorite(Movie movie) {
-    return _movieLocalSource.addToFavorite(MovieModel.fromEntity(movie));
+    return _movieRemoteSource.updateFavorite(movie.id, true);
   }
   
   @override
   Future<void> saveToWatchList(Movie movie) {
-    return _movieLocalSource.addToWatchList(MovieModel.fromEntity(movie));
+    return _movieRemoteSource.updateWatchList(movie.id, true);
+  }
+  
+  @override
+  Future<List<Movie>> getFavorites() {
+    return _movieRemoteSource.getFavorites();
+  }
+  
+  @override
+  Future<List<Movie>> getWatchList() {
+    return _movieRemoteSource.getWatchList();
+  }
+  
+  @override
+  Future<MovieDetailModel> getMovieDetail(int? id) {
+    return _movieRemoteSource.getMovieDetail(id);
   }
 
 }

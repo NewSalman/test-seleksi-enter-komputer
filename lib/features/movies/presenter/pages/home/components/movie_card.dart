@@ -1,15 +1,16 @@
+import 'package:enter_komputer_test/core/components/add_favorite_button.dart';
+import 'package:enter_komputer_test/core/components/add_watchlist_button.dart';
 import 'package:enter_komputer_test/core/components/image_network_loader.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
-import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  MovieCard({super.key, required this.movie});
+  const MovieCard({super.key, required this.movie});
 
 
-  TextStyle textStyle = TextStyle(
+  final TextStyle textStyle = const TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
   );
@@ -23,12 +24,10 @@ class MovieCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Builder(builder: (bCtx) {
-            return Container(
-              child: ImageNetworkLoader(
-                url: Constants.imageURL + movie.backdropPath!,
-                size: Size(MediaQuery.of(bCtx).size.width * .3, MediaQuery.of(bCtx).size.height),
-                boxFit: BoxFit.cover,
-              ),
+            return ImageNetworkLoader(
+              url: Constants.imageURL + movie.backdropPath!,
+              size: Size(MediaQuery.of(bCtx).size.width * .3, MediaQuery.of(bCtx).size.height),
+              boxFit: BoxFit.cover,
             );
           }),
           Expanded(
@@ -82,38 +81,12 @@ class MovieCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {}, 
-                              icon: const Icon(Icons.favorite_border_rounded, size: 12), 
-                              label: const Text("Add Favorite", style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton.icon(
-                              onPressed: () {}, 
-                              icon: const Icon(Icons.add, size: 12),
-                              label: const Text("Add to Watchlist", style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              )
-                            ),
-                          ),
-                        ],
-                      ),
+                      AddToFavoriteButton(),
+                      SizedBox(height: 8),
+                      AddToWatchlistButton(),
 
                     ],
                   )

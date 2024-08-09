@@ -1,14 +1,15 @@
+import 'package:enter_komputer_test/features/movies/domain/entity/genre.dart';
 import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
 import 'package:flutter/material.dart';
 
 class GenreChips extends StatelessWidget {
-  final Movie movie;
-  const GenreChips({super.key, required this.movie});
+  final List<Genre> genres;
+  const GenreChips({super.key, required this.genres});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: movie.genres.map((genre) {
+      children: genres.map((genre) {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 2),
           margin: const EdgeInsets.only(right: 3),
