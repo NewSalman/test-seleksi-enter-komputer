@@ -1,3 +1,4 @@
+import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_page.dart';
 import 'package:enter_komputer_test/features/user/presenter/pages/profile_page.dart';
 import 'package:enter_komputer_test/features/user/presenter/pages/splash_page.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page.dart';
@@ -12,17 +13,24 @@ final appRoute = GoRouter(
     GoRoute(
       name: "splash",
       path: "/",
-      builder:(context, state) => const SplashPage(),
+      builder:(_, __) => const SplashPage(),
     ),
     GoRoute(
       name: "profile",
       path: "/profile",
-      builder: (context, state) => const ProfilePage(),
+      builder: (_, __) => const ProfilePage(),
     ),
     GoRoute(
-      name: "home",
-      path: "/home",
-      builder: (context, state) => const HomePage(),
+      name: "movie",
+      path: "/movie",
+      builder: (_, __) => const HomePage(),
+      routes: [
+        GoRoute(
+          name: "movie_detail",
+          path: "movie_detail",
+          builder: (_, state) =>  MovieDetailPage(movieId: state.extra as String?)
+        )
+      ]
     ),
   ]
 );
