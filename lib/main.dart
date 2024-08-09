@@ -1,8 +1,8 @@
 import 'package:enter_komputer_test/dependency_container.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_notifier.dart';
+import 'package:enter_komputer_test/features/user/presenter/providers/watchlist_favorite_notifier.dart';
 import 'package:enter_komputer_test/router.dart';
-// ignore: unused_import
-import 'package:localstore/localstore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<HomePageNotifier>(create: (_) => sl.get<HomePageNotifier>())
+        ChangeNotifierProvider<HomePageNotifier>(create: (_) => sl.get<HomePageNotifier>()),
+        ChangeNotifierProvider<MovieDetailNotifier>(create: (_) => sl.get<MovieDetailNotifier>()),
+        ChangeNotifierProvider<WatchlistFavoriteNotifier>(create: (_) => sl.get<WatchlistFavoriteNotifier>()),
       ],
       child: MaterialApp.router(
       theme: ThemeData(
