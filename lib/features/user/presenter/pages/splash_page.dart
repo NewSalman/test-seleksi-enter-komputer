@@ -1,6 +1,6 @@
 import 'package:enter_komputer_test/core/components/loading.dart';
 import 'package:enter_komputer_test/core/components/main_layout.dart';
-import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/playlist/playlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +19,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-  
+
     Future.delayed(const Duration(seconds: 7), () => {
-      context.goNamed("home")
+      context.goNamed("movie")
     });
   }
 

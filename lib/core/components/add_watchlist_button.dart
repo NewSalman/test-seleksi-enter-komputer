@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddToWatchlistButton extends StatelessWidget {
-  const AddToWatchlistButton({super.key});
+  final Function()? onPressed;
+  const AddToWatchlistButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,14 @@ class AddToWatchlistButton extends StatelessWidget {
         return SizedBox(
           width: MediaQuery.of(context).size.width,
           child: ElevatedButton.icon(
-            onPressed: () {}, 
+            onPressed: onPressed, 
             icon: const Icon(Icons.add_rounded, size: 15), 
             label: const Text("Add to Watchlist", style: TextStyle(
                 fontSize: 12,
               ),
             ),
             style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.yellowAccent
+              foregroundColor: Colors.yellow[600]
             ),
           ),
         );

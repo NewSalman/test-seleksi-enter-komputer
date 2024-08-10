@@ -37,44 +37,66 @@ class _HomePageState extends State<HomePage> {
         await _notifier.refresh();
       },
       child: MainLayout(
-      body: ListView(
-        primary: true,
+      body: Stack(
         children: [
-          const MovieCarouselWidget(),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Popular Movies"),
-          ),
-    
-          Consumer<HomePageNotifier>(
-            builder:(context, homeState, child) {
-    
-              if(homeState.popularMoviesState.error != null) {
-                return const SizedBox.shrink();
-              }
-    
-              return Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (_, i) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.goNamed("movie_detail", extra: homeState.popularMoviesState.values[i].id.toString());
-                      },
-                      child: MovieCard(movie: homeState.popularMoviesState.values[i]),
-                    );
-                  }, 
-                  separatorBuilder: (_, __) => const SizedBox(height: 8), 
-                  itemCount: homeState.popularMoviesState.values.length
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+          ListView(
+            primary: true,
+            children: [
+              const MovieCarouselWidget(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Popular Movies", style: TextStyle(fontSize: 28)),
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.all(12.0),
+              //   child: const MovieFilterChips(),
+              // ),
+
+              Consumer<HomePageNotifier>(
+                builder:(context, homeState, child) {
+        
+                  if(homeState.popularMoviesState.error != null) {
+                    return const SizedBox.shrink();
+                  }
+        
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (_, i) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.goNamed("movie_detail", extra: homeState.popularMoviesState.values[i].id.toString());
+                          },
+                          child: MovieCard(movie: homeState.popularMoviesState.values[i]),
+                        );
+                      }, 
+                      separatorBuilder: (_, __) => const SizedBox(height: 8), 
+                      itemCount: homeState.popularMoviesState.values.length
+                    ),
+                  );
+                },
+              ),
+            ],
         ),
+        Align(
+          alignment: Alignment.topRight,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            child: ElevatedButton.icon(
+              onPressed: () {
+                context.goNamed("movie_playlist");
+              }, 
+              icon: const Icon(Icons.person), 
+              label: const Text("Profile")
+            ),
+          ),
+        ),
+      ],
+      ),
+      ),
     );
   }
 }

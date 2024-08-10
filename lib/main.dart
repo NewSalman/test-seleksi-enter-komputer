@@ -1,7 +1,7 @@
 import 'package:enter_komputer_test/dependency_container.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_notifier.dart';
-import 'package:enter_komputer_test/features/user/presenter/providers/watchlist_favorite_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/playlist/playlist_notifier.dart';
 import 'package:enter_komputer_test/router.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<HomePageNotifier>(create: (_) => sl.get<HomePageNotifier>()),
         ChangeNotifierProvider<MovieDetailNotifier>(create: (_) => sl.get<MovieDetailNotifier>()),
-        ChangeNotifierProvider<WatchlistFavoriteNotifier>(create: (_) => sl.get<WatchlistFavoriteNotifier>()),
+        ChangeNotifierProvider<PlaylistNotifier>(create: (_) => sl.get<PlaylistNotifier>()),
       ],
       child: MaterialApp.router(
       theme: ThemeData(

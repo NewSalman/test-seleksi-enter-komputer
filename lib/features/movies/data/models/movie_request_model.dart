@@ -14,7 +14,7 @@ class MovieRequestModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['media_type'] = mediaType;
+    data['media_type'] = "movie";
     data['media_id'] = mediaId;
 
     if(type == MovieRequestType.favorite) {

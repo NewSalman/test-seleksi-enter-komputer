@@ -57,8 +57,6 @@ class HomePageNotifier extends ChangeNotifier {
   }
 
   Future<void> getGenreList() async {
-    
-
     try {
       _genreList.clear();
       _genreList.addAll(await _genreRepository.getListGenre());

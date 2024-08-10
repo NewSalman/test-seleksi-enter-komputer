@@ -9,7 +9,7 @@ import 'package:enter_komputer_test/features/movies/domain/repository/genre_repo
 import 'package:enter_komputer_test/features/movies/domain/repository/movie_repository.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_notifier.dart';
-import 'package:enter_komputer_test/features/user/presenter/providers/watchlist_favorite_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/playlist/playlist_notifier.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
@@ -66,5 +66,5 @@ void setup() {
     () => MovieDetailNotifier(sl.get<MovieRepository>())
   );
 
-  sl.registerSingleton(WatchlistFavoriteNotifier(sl.get<MovieRepository>()));
+  sl.registerSingleton(PlaylistNotifier(sl.get<MovieRepository>()));
 }

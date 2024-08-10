@@ -5,6 +5,7 @@ import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
 import 'package:enter_komputer_test/features/movies/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
+  // ignore: unused_field
   final MovieLocalSource _movieLocalSource;
   final MovieRemoteSource _movieRemoteSource;
 

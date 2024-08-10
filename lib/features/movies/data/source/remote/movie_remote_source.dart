@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
 import 'package:enter_komputer_test/features/movies/data/models/movie_detail_model.dart';
@@ -26,20 +28,20 @@ class MovieRemoteSource {
 
   Future<List<MovieModel>> getWatchList({String page = "1"}) {
     return _dio.get("account/${Constants.accountId}/watchlist/movies?page=$page&sort_by=created_at.asc")
-    .then((response) => MovieModel.fromResponse(response.data["result"]));
+    .then((response) => MovieModel.fromResponse(response.data["results"]));
   }
 
   Future<void> updateFavorite(int? id, bool value) {
     return _dio.post(
       "account/21424202/favorite",
-      data: MovieRequestModel(type: MovieRequestType.favorite, mediaId: id, value: value)
+      data: jsonEncode(MovieRequestModel(type: MovieRequestType.favorite, mediaId: id, value: value).toJson())
     );
   }
 
   Future<void> updateWatchList(int? id, bool value) {
     return _dio.post(
       "account/21424202/watchlist",
-      data: MovieRequestModel(type: MovieRequestType.wacthlist, mediaId: id, value: value)
+      data: jsonEncode(MovieRequestModel(type: MovieRequestType.wacthlist, mediaId: id, value: value).toJson())
     );
   }
 

@@ -2,10 +2,12 @@ import 'package:enter_komputer_test/core/components/add_favorite_button.dart';
 import 'package:enter_komputer_test/core/components/add_watchlist_button.dart';
 import 'package:enter_komputer_test/core/components/image_network_loader.dart';
 import 'package:enter_komputer_test/core/components/main_layout.dart';
+import 'package:enter_komputer_test/core/components/custom_snackbar.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
-import 'package:enter_komputer_test/dependency_container.dart';
+import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/movie_detail/movie_detail_notifier.dart';
+import 'package:enter_komputer_test/features/movies/presenter/pages/playlist/playlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "package:intl/intl.dart";
@@ -70,9 +72,30 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     const SizedBox(height: 12),
                     GenreChips(genres: value.movieDetail?.genres ?? []),
                     const SizedBox(height: 12),
-                    const AddToFavoriteButton(),
+                    AddToFavoriteButton(
+                      onPressed: () {
+                        context.read<PlaylistNotifier>().addToFavorite(Movie(id: value.movieDetail?.id))
+                        .then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
+                        })
+                        .catchError((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(failedSnackbar);
+                        });
+                        
+                      }
+                    ),
                     const SizedBox(height: 6),
-                    const AddToWatchlistButton(),
+                    AddToWatchlistButton(
+                      onPressed: () {
+                        context.read<PlaylistNotifier>().addToFavorite(Movie(id: value.movieDetail?.id))
+                        .then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
+                        })
+                        .catchError((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(failedSnackbar);
+                        });
+                      }
+                    ),
 
 
                     _infoGroup("Overview", value.movieDetail?.overview),
@@ -82,17 +105,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     const SizedBox(height: 12),
                     Text("Production Companies", style: titleTextStyle),
                     const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                        children: value.movieDetail?.productionCompanies
-                        ?.map((companies) {
-                          return Text("${companies.name}, ", style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400));
-                        }).toList() ?? [],
-                      ),
-                        )
-                      ],
+                    Column(
+                      children:[ Row(
+                      children: value.movieDetail?.productionCompanies?.take(3)
+                      .map((companies) {
+                        return Text("${companies.name}, ", style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400));
+                      }).toList() ?? [],
+                          ),]
                     ),
 
                     _infoGroup("Status", value.movieDetail?.status)

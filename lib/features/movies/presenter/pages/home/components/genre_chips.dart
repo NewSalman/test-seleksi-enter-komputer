@@ -1,5 +1,4 @@
 import 'package:enter_komputer_test/features/movies/domain/entity/genre.dart';
-import 'package:enter_komputer_test/features/movies/domain/entity/movie.dart';
 import 'package:flutter/material.dart';
 
 class GenreChips extends StatelessWidget {
@@ -13,7 +12,7 @@ class GenreChips extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 2),
           margin: const EdgeInsets.only(right: 3),
-          width: MediaQuery.of(context).size.width * .15,
+          width: MediaQuery.of(context).size.width * .2,
           decoration: BoxDecoration(
             border: Border.all(
               width: .5
@@ -23,7 +22,7 @@ class GenreChips extends StatelessWidget {
           child: Text(genre.name ?? "",
           textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 5,
+              fontSize: 9,
               fontWeight: FontWeight.w500,
               
             ),

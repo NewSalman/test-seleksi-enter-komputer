@@ -1,6 +1,5 @@
 import 'package:enter_komputer_test/core/components/image_network_loader.dart';
 import 'package:enter_komputer_test/core/utils/constant.dart';
-import 'package:enter_komputer_test/features/movies/presenter/pages/home/components/genre_chips.dart';
 import 'package:enter_komputer_test/features/movies/presenter/pages/home/home_page_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +32,7 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
                     image: const AssetImage("assets/images/fail.png"), 
                     width: MediaQuery.of(ctx).size.width * .2
                   ),
-                  const Text("opss..."),
+                  const Text("opss... please check your internet"),
                 ],
               ),
             );
@@ -88,15 +87,6 @@ class _MovieCarouselWidgetState extends State<MovieCarouselWidget> {
                                       fontSize: 18,
                                     ),
                                   ),
-                                  Builder(
-                                    builder: (_) {
-                                      if(state.genreState.error != null) {
-                                        return const SizedBox.shrink();
-                                      }
-              
-                                      return GenreChips(genres: movie.genres);
-                                    },
-                                  )
                                 ],
                               ),
                             )
