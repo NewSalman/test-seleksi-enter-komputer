@@ -2,6 +2,8 @@
 
 Ini adalah project test reqruitment Enter Komputer, saya bukanlah seorang designer tapi saya programmer dengan skill analisis yang baik, adaptasi yang cepat, cepat dalam mempelajari sesuatu dan pemikiran yang kritis.
 
+Project Flutter ini menggunakan arsitekture ***Clean Architecture***.
+
 ## Running The Project
 Jika ingin menjalankan project secara debug maka kamu akan membutuhkan **Access Token** dan **User ID** dari The Movie DB dari akun The Movie DB yang sudah didaftarkan
 
