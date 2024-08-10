@@ -33,14 +33,14 @@ class MovieRemoteSource {
 
   Future<void> updateFavorite(int? id, bool value) {
     return _dio.post(
-      "account/21424202/favorite",
+      "account/${Constants.accountId}/favorite",
       data: jsonEncode(MovieRequestModel(type: MovieRequestType.favorite, mediaId: id, value: value).toJson())
     );
   }
 
   Future<void> updateWatchList(int? id, bool value) {
     return _dio.post(
-      "account/21424202/watchlist",
+      "account/${Constants.accountId}/watchlist",
       data: jsonEncode(MovieRequestModel(type: MovieRequestType.wacthlist, mediaId: id, value: value).toJson())
     );
   }

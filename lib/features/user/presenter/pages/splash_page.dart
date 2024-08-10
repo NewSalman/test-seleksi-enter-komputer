@@ -1,9 +1,7 @@
 import 'package:enter_komputer_test/core/components/loading.dart';
 import 'package:enter_komputer_test/core/components/main_layout.dart';
-import 'package:enter_komputer_test/features/movies/presenter/pages/playlist/playlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

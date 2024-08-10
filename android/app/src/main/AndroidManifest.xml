@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
-        android:label="enter_komputer_test"
+        android:label="Movie App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

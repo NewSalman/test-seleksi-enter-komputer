@@ -10,7 +10,7 @@ class MovieFilterChips extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        children: [
+        children: const [
           ChoiceChip(selected: false, backgroundColor: Colors.white, label: Text("vote"),)
         ],
       ),
